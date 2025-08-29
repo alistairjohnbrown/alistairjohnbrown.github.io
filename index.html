@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personal Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .main-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .widget h3 {
+            margin-bottom: 15px;
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+
+        .strava-widget {
+            text-align: center;
+        }
+
+        .strava-widget iframe {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .contact-info h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: -1;
+            }
+            
+            .strava-widget iframe {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth hover effects */
+        .widget, .main-content {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .widget:hover, .main-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to My Site</h1>
+            <p>Senior Manager | Data Engineering & Business Intelligence</p>
+        </header>
+
+        <div class="content-grid">
+            <main class="main-content">
+                <section class="section">
+                    <h2>About Me</h2>
+                    <p>I'm a senior manager and consultant at Sopra Steria, specializing in business intelligence and data engineering. With a mathematics background and over two decades of experience, I work on cutting-edge projects involving Microsoft Fabric and Databricks.</p>
+                    <p>Originally from the UK, I've been living in Norway since 2010, working with exciting clients including the Norwegian Institute of Marine Research, Odfjell Shipping, Brage Finans, and Hansa Borg Bryggerier.</p>
+                </section>
+
+                <section class="section">
+                    <h2>Technical Skills</h2>
+                    <p>My expertise spans across various technologies and platforms:</p>
+                    <div class="skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Microsoft Fabric</span>
+                        <span class="skill-tag">Databricks</span>
+                        <span class="skill-tag">MLOps</span>
+                        <span class="skill-tag">Azure DevOps</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">VS Code</span>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2>Current Projects</h2>
+                    <p>I'm currently engaged in multiple data engineering and business intelligence projects, focusing on modern cloud platforms and machine learning operations. My work involves building scalable data solutions and implementing best practices for data governance and analytics.</p>
+                </section>
+            </main>
+
+            <aside class="sidebar">
+                <div class="widget strava-widget">
+                    <h3>🏃‍♂️ Running Activity</h3>
+                    <iframe 
+                        allowtransparency='true' 
+                        frameborder='0' 
+                        height='454' 
+                        scrolling='no' 
+                        src='https://www.strava.com/clubs/1025442/latest-rides/5a3f90ad9f561794313f503c1cf498ae75899f92?show_rides=true' 
+                        width='300'>
+                    </iframe>
+                </div>
+
+                <div class="widget contact-info">
+                    <h3>🌍 Location</h3>
+                    <p>Sotra, Norway<br>
+                    (West of Bergen)</p>
+                </div>
+
+                <div class="widget">
+                    <h3>⚽ Interests</h3>
+                    <p>Liverpool FC supporter<br>
+                    Running enthusiast<br>
+                    Data visualization<br>
+                    Norwegian language</p>
+                </div>
+            </aside>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Your Personal Website. Built with passion for data and running.</p>
+        </footer>
+    </div>
+</body>
+</html>
