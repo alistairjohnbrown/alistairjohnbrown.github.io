@@ -13,11 +13,17 @@ A collection of responsive web dashboards featuring running club management and 
 
 ### ⚽ **Fantasy Football** - League Analytics Dashboard
 - **Live FPL Integration**: Real-time data from Fantasy Premier League API (League ID: 1509278)
-- **League Table**: Live rankings with gameweek scores and position movement indicators
-- **Smart Caching**: 24-hour localStorage caching for reliable data display
-- **Gameweek Information**: Current gameweek and deadline display
-- **Compact Design**: Optimized table layout to display maximum teams without scrolling
-- **Display Optimized**: Designed for ScreenCloud digital display screens
+- **Official FPL Styling**: Authentic Fantasy Premier League color scheme and design elements
+- **Two-Column Layout**: 
+  - Left: Title and newspaper image ("Runde 2.png")
+  - Right: Live league table with auto-scroll functionality
+- **Sticky Headers**: Fixed column headers that remain visible during scrolling
+- **Auto-Scroll Table**: Smooth scrolling animation showcasing all league participants
+- **Smart Caching**: 24-hour localStorage caching with multiple CORS proxy fallbacks
+- **Position Tracking**: Live position movement indicators with gold/silver/bronze highlighting
+- **Compressed Layout**: Optimized table design showing maximum teams per screen
+- **Equal Height Containers**: Perfectly aligned left and right sections
+- **Centered Design**: Professional layout centered on screen for optimal viewing
 
 ## 📺 ScreenCloud Integration
 
@@ -27,10 +33,13 @@ The individual dashboard pages are specifically designed for **ScreenCloud digit
   - Running Dashboard: `https://alistairjohnbrown.github.io/pages/running.html`
   - Fantasy Football: `https://alistairjohnbrown.github.io/pages/fantasy-football.html`
 - **Clean Interface**: No navigation elements that would clutter display screens
-- **Auto-Refresh**: Built-in refresh functionality for live data updates (FPL every 5 minutes)
-- **Full-Screen Optimized**: Content utilizes full screen real estate
+- **Auto-Refresh**: Built-in refresh functionality for live data updates
+  - FPL: Every 5 minutes with smart caching
+  - Auto-scroll: Continuous table animation with 3-second pauses
+- **Full-Screen Optimized**: Content utilizes full screen real estate with equal-height containers
 - **Responsive Design**: Adapts to different screen sizes and orientations
 - **Cross-Browser Compatible**: Enhanced with vendor prefixes for older display browsers
+- **Professional Styling**: Official FPL colors and newspaper integration for authentic appearance
 
 ## 📁 Project Structure
 
@@ -43,13 +52,12 @@ alistairjohnbrown.github.io/
 ├── assets/
 │   ├── images/               # Photos, logos, and graphics
 │   │   ├── Løpegruppen.png
+│   │   ├── Runde 2.png      # Newspaper for fantasy football
 │   │   ├── Alistair.jpg
 │   │   ├── Maren.jpg
-│   │   ├── Paul.jpg
 │   │   └── Sven.jpg
 │   └── data/                 # CSV data files
 │       └── events.csv        # Running events
-│   │   └── fantasy-league.csv # Fantasy football data
 │   ├── css/                  # Future: External stylesheets
 │   └── js/                   # Future: External JavaScript
 ├── README.md
@@ -61,16 +69,19 @@ alistairjohnbrown.github.io/
 
 - **HTML5**: Semantic markup with accessibility features
 - **CSS3**: 
-  - CSS Grid and Flexbox for responsive layouts
-  - Custom gradients and animations
-  - Mobile-first responsive design
-  - Backdrop filters and modern effects
+  - CSS Grid and Flexbox for responsive layouts with ScreenCloud compatibility
+  - Official Fantasy Premier League color schemes and gradients
+  - Sticky positioning for fixed table headers
+  - Custom scrollbars and backdrop filters
+  - Equal-height containers and centered layouts
+  - Mobile-first responsive design with vendor prefixes
 - **JavaScript**: 
+  - Fantasy Premier League API integration with live data fetching
+  - Auto-scroll animation system for table display
   - CSV parsing for dynamic data loading
-  - Auto-refresh functionality (FPL API integration)
-  - Interactive UI elements
-  - Smart caching with localStorage
-  - CORS proxy handling for external APIs
+  - Smart caching with localStorage and 24-hour expiration
+  - Multiple CORS proxy fallback system for API reliability
+  - Auto-refresh functionality and error handling
 - **External APIs**: 
   - Strava club activity widgets with anti-caching
   - Fantasy Premier League API integration

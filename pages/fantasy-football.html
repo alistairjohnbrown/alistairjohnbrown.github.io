@@ -4,7 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-eq        .table-body-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .table-body-container::-webkit-scrollbar-track {
+            background: rgba(55, 0, 60, 0.3);
+            border-radius: 3px;
+        }
+
+        .table-body-container::-webkit-scrollbar-thumb {
+            background: #00ff87;
+            border-radius: 3px;
+        }
+
+        .table-body-container::-webkit-scrollbar-thumb:hover {
+            background: #00cc6a;
+        }
+
+        /* Add padding to header to account for scrollbar */
+        .table-header {
+            padding-right: 6px;
+        }ent="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="description" content="Fantasy Football League Dashboard - Team rankings, player stats, and weekly analysis">
     <meta name="keywords" content="fantasy football, premier league, FPL, football statistics, team rankings">
@@ -16,100 +37,243 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 100vh;
-            padding: 15px;
+            background: linear-gradient(135deg, #37003c 0%, #00ff87 100%);
             color: white;
+            line-height: 1.6;
+            padding: 15px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .main-content {
             display: flex;
-            justify-content: center;
-            max-width: 800px;
+            gap: 30px;
+            max-width: 1400px;
             margin: 0 auto;
+            align-items: flex-start;
+            height: calc(100vh - 30px);
+            justify-content: center;
         }
 
-        .league-column {
-            width: 100%;
-            max-width: 800px;
+        .left-column, .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .left-column {
+            max-width: 500px;
+        }
+
+        .right-column {
+            max-width: 600px;
         }
 
         .column {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
+            background: rgba(55, 0, 60, 0.8);
+            border-radius: 12px;
             padding: 20px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(0, 255, 135, 0.3);
+            box-shadow: 0 8px 32px rgba(55, 0, 60, 0.3);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 500px;
         }
 
-        .column h2 {
-            margin-bottom: 15px;
-            font-size: 1.4rem;
+        .title-section h1 {
+            font-size: 1.8rem;
             text-align: center;
-            border-bottom: 2px solid rgba(255,255,255,0.3);
+            margin-bottom: 25px;
+            color: #00ff87;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+                .newspaper-placeholder {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .newspaper-placeholder img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .table-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            text-align: center;
+            border-bottom: 2px solid #00ff87;
             padding-bottom: 8px;
+            color: #00ff87;
+        }
+
+        .table-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .table-container {
+            flex: 1;
+            height: calc(500px - 40px - 20px);
+            margin-top: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .league-table, .league-table-body {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+            font-size: 0.85rem;
+            table-layout: fixed;
+        }
+
+        .league-table th:nth-child(1),
+        .league-table-body td:nth-child(1) { width: 8%; } /* Pos */
+        
+        .league-table th:nth-child(2),
+        .league-table-body td:nth-child(2) { width: 32%; } /* Manager */
+        
+        .league-table th:nth-child(3),
+        .league-table-body td:nth-child(3) { width: 35%; } /* Team Name */
+        
+        .league-table th:nth-child(4),
+        .league-table-body td:nth-child(4) { width: 12%; } /* GW */
+        
+        .league-table th:nth-child(5),
+        .league-table-body td:nth-child(5) { width: 13%; } /* Total */
+
+        .table-body-container {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #00ff87 rgba(55, 0, 60, 0.3);
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: rgba(55, 0, 60, 0.3);
+            border-radius: 3px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: #00ff87;
+            border-radius: 3px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #00cc6a;
         }
 
         .loading-message, .error-message {
             text-align: center;
-            padding: 30px;
-            font-size: 1rem;
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #00ff87;
+            margin: 0;
         }
 
         .error-message {
             color: #ff6b6b;
         }
 
-        .gameweek-info {
-            text-align: center;
-            background: rgba(255,255,255,0.05);
-            padding: 6px 12px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.8);
-        }
-
         .position-movement {
-            font-size: 0.75rem;
-            margin-left: 4px;
+            font-size: 0.7rem;
+            margin-left: 3px;
         }
 
         .movement-up {
-            color: #4CAF50;
+            color: #00ff87;
         }
 
         .movement-down {
-            color: #f44336;
+            color: #ff6b6b;
         }
 
         .movement-same {
-            color: #9E9E9E;
+            color: #999;
         }
+
+        .position-1 { color: #FFD700; font-weight: bold; background: rgba(255, 215, 0, 0.15) !important; }
+        .position-2 { color: #C0C0C0; font-weight: bold; background: rgba(192, 192, 192, 0.15) !important; }
+        .position-3 { color: #CD7F32; font-weight: bold; background: rgba(205, 127, 50, 0.15) !important; }
 
         .league-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .league-table th,
-        .league-table td {
-            padding: 6px 8px;
+        .league-table-body td {
+            padding: 4px 6px;
             text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(0, 255, 135, 0.2);
         }
 
         .league-table th {
-            background: rgba(255,255,255,0.1);
+            background: #37003c;
             font-weight: bold;
+            color: #00ff87;
+            font-size: 0.8rem;
+            border-bottom: 2px solid #00ff87;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .league-table tr:hover {
-            background: rgba(255,255,255,0.05);
+        .league-table-body td {
+            background: rgba(255, 255, 255, 0.02);
+        }        .league-table tr:hover {
+            background: rgba(0, 255, 135, 0.1);
+        }
+
+        .league-table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .position-1 { color: #FFD700; font-weight: bold; }
@@ -121,17 +285,35 @@
                 padding: 10px;
             }
             
+            .main-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .left-column, .right-column {
+                max-width: 100%;
+            }
+            
+            .title-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .newspaper-placeholder {
+                height: 250px;
+                font-size: 1rem;
+            }
+            
             .league-table {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
             
             .league-table th,
             .league-table td {
-                padding: 8px 5px;
+                padding: 3px 4px;
             }
             
             .position-movement {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
             }
         }
     </style>
@@ -139,35 +321,54 @@
 
 <body>
     <main id="main-content" class="main-content">
-        <!-- Single Column: League Table -->
-        <div class="column league-column">
-            <h2>⚽️ Fantasy Premier League 🏆</h2>
-            <div id="gameweekInfo" class="gameweek-info">
-                <p>Loading gameweek information...</p>
+        <!-- Left Column: Title and Newspaper Placeholder -->
+        <div class="left-column">
+            <div class="column">
+                <div class="title-section">
+                    <h1>⚽ Fantasy Premier League</h1>
+                </div>
+                <div class="newspaper-placeholder">
+                    <img src="../assets/images/Runde 2.png" alt="Runde 2 Newspaper" />
+                </div>
             </div>
-            
-            <div id="loading" class="loading-message">
-                <p>Loading league data...</p>
+        </div>
+
+        <!-- Right Column: League Table -->
+        <div class="right-column">
+            <div class="column">
+                                <div class="table-section">
+                    <div id="loading" class="loading-message">
+                        <p>Loading league data...</p>
+                    </div>
+                    
+                    <div id="error" class="error-message" style="display: none;">
+                        <p>Unable to load league data. Please try again later.</p>
+                    </div>
+                    
+                    <div class="table-container">
+                        <div class="table-wrapper">
+                            <table class="league-table" id="leagueTable" style="display: none;">
+                                <thead class="table-header">
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th>Manager</th>
+                                        <th>Team Name</th>
+                                        <th>GW</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div class="table-body-container">
+                                <table class="league-table-body">
+                                    <tbody id="leagueTableBody">
+                                        <!-- Table rows will be inserted here by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div id="error" class="error-message" style="display: none;">
-                <p>Unable to load league data. Please try again later.</p>
-            </div>
-            
-            <table class="league-table" id="leagueTable" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>Pos</th>
-                        <th>Manager</th>
-                        <th>Team Name</th>
-                        <th>GW</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody id="leagueTableBody">
-                    <!-- Data will be populated by JavaScript -->
-                </tbody>
-            </table>
         </div>
     </main>
 
@@ -206,102 +407,62 @@
             }
         }
 
-        // Caching system for gameweek info
-        const CACHE_KEY = 'fpl_gameweek_cache';
-        const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-        // Function to get cached gameweek info
-        function getCachedGameweekInfo() {
-            try {
-                const cached = localStorage.getItem(CACHE_KEY);
-                if (cached) {
-                    const data = JSON.parse(cached);
-                    const now = Date.now();
-                    if (now - data.timestamp < CACHE_DURATION) {
-                        console.log('Using cached gameweek info:', data.info);
-                        return data.info;
-                    }
-                }
-            } catch (error) {
-                console.log('Error reading cache:', error);
-            }
-            return null;
-        }
-
-        // Function to cache gameweek info
-        function cacheGameweekInfo(info) {
-            try {
-                const cacheData = {
-                    info: info,
-                    timestamp: Date.now()
-                };
-                localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-                console.log('Cached gameweek info:', info);
-            } catch (error) {
-                console.log('Error caching data:', error);
-            }
-        }
-
-        // Function to fetch current gameweek information
-        async function fetchGameweekInfo() {
-            // First, try to load from cache
-            const cachedInfo = getCachedGameweekInfo();
-            if (cachedInfo) {
-                document.getElementById('gameweekInfo').innerHTML = `<p>${cachedInfo}</p>`;
+        // Auto-scroll function for the table
+        let scrollInterval;
+        function startAutoScroll() {
+            console.log('Starting auto-scroll...');
+            const tableContainer = document.querySelector('.table-body-container');
+            if (!tableContainer) {
+                console.log('Table body container not found');
                 return;
             }
-
-            try {
-                console.log('Fetching gameweek information from API...');
-                const data = await fetchWithProxy(`${FPL_API_BASE}/bootstrap-static/`);
-                console.log('Gameweek data received:', data);
-                
-                // Find current gameweek
-                const currentGameweek = data.events.find(event => event.is_current) || 
-                                       data.events.find(event => event.is_next) ||
-                                       data.events[0];
-                
-                if (currentGameweek) {
-                    console.log('Current gameweek:', currentGameweek);
-                    const deadlineDate = new Date(currentGameweek.deadline_time);
-                    const options = { 
-                        weekday: 'short', 
-                        day: 'numeric', 
-                        month: 'short',
-                        hour: '2-digit', 
-                        minute: '2-digit',
-                        hour12: false
-                    };
-                    const formattedDeadline = deadlineDate.toLocaleDateString('en-GB', options);
-                    const gameweekText = `Gameweek ${currentGameweek.id} | Deadline: ${formattedDeadline}`;
-                    
-                    // Cache the successful result
-                    cacheGameweekInfo(gameweekText);
-                    
-                    document.getElementById('gameweekInfo').innerHTML = `<p>${gameweekText}</p>`;
-                } else {
-                    document.getElementById('gameweekInfo').innerHTML = 
-                        `<p>Gameweek information unavailable</p>`;
+            
+            console.log('Container height:', tableContainer.clientHeight, 'Scroll height:', tableContainer.scrollHeight);
+            
+            // Clear any existing interval
+            if (scrollInterval) {
+                clearInterval(scrollInterval);
+            }
+            
+            // Check if scrolling is needed - restore overflow check
+            if (tableContainer.scrollHeight <= tableContainer.clientHeight) {
+                console.log('No overflow detected, auto-scroll not needed');
+                return; // No overflow, no need to scroll
+            }
+            
+            console.log('Starting auto-scroll - overflow detected');
+            let scrollDirection = 1; // 1 for down, -1 for up
+            let pauseCounter = 0;
+            const pauseDuration = 60; // Pause for 60 cycles (about 3 seconds at 50ms intervals)
+            
+            scrollInterval = setInterval(() => {
+                if (pauseCounter > 0) {
+                    pauseCounter--;
+                    return;
                 }
-            } catch (error) {
-                console.error('Error fetching gameweek info:', error);
-                // Try to use cached data even if it's older
-                const oldCached = localStorage.getItem(CACHE_KEY);
-                if (oldCached) {
-                    try {
-                        const data = JSON.parse(oldCached);
-                        console.log('Using older cached data as fallback:', data.info);
-                        document.getElementById('gameweekInfo').innerHTML = `<p>${data.info} (cached)</p>`;
-                        return;
-                    } catch (e) {
-                        console.log('Error parsing old cache:', e);
+                
+                const scrollStep = 1;
+                const currentScroll = tableContainer.scrollTop;
+                const maxScroll = Math.max(0, tableContainer.scrollHeight - tableContainer.clientHeight);
+                
+                if (scrollDirection === 1) {
+                    // Scrolling down
+                    if (currentScroll >= maxScroll) {
+                        scrollDirection = -1;
+                        pauseCounter = pauseDuration; // Pause at bottom
+                    } else {
+                        tableContainer.scrollTop += scrollStep;
+                    }
+                } else {
+                    // Scrolling up
+                    if (currentScroll <= 0) {
+                        scrollDirection = 1;
+                        pauseCounter = pauseDuration; // Pause at top
+                    } else {
+                        tableContainer.scrollTop -= scrollStep;
                     }
                 }
-                
-                // Show a clean message when gameweek info can't be loaded
-                document.getElementById('gameweekInfo').innerHTML = 
-                    `<p>Fantasy Premier League | League ${LEAGUE_ID}</p>`;
-            }
+            }, 50); // Back to 50ms for smooth movement
         }
 
         // Function to fetch league standings
@@ -364,8 +525,14 @@
                 tableBody.appendChild(row);
             });
             
-            // Show the table
+            // Show the tables
             tableElement.style.display = 'table';
+            document.querySelector('.table-body-container').style.display = 'block';
+            
+            // Start auto-scroll after a short delay to ensure table is rendered
+            setTimeout(() => {
+                startAutoScroll();
+            }, 1000);
         }
 
         // Function to show error message
@@ -378,8 +545,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Page loaded, fetching FPL data...');
             
-            // Fetch data
-            fetchGameweekInfo();
+            // Fetch league data only
             fetchLeagueStandings();
             
             // Set up auto-refresh every 5 minutes
