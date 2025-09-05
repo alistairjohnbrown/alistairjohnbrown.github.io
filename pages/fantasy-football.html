@@ -424,20 +424,35 @@
                 clearInterval(scrollInterval);
             }
             
-            // Check if scrolling is needed - restore overflow check
+            // Check if scrolling is needed
             if (tableContainer.scrollHeight <= tableContainer.clientHeight) {
                 console.log('No overflow detected, auto-scroll not needed');
                 return; // No overflow, no need to scroll
             }
             
-            console.log('Starting auto-scroll - overflow detected');
-            let scrollDirection = 1; // 1 for down, -1 for up
+            console.log('Starting auto-scroll with 5-second initial delay');
+            let initialDelayCounter = 100; // 5 seconds at 50ms intervals
             let pauseCounter = 0;
-            const pauseDuration = 60; // Pause for 60 cycles (about 3 seconds at 50ms intervals)
+            let isAtBottom = false;
+            const pauseDuration = 100; // Pause for 5 seconds at bottom before reset
             
             scrollInterval = setInterval(() => {
+                // Initial 5-second delay before starting to scroll
+                if (initialDelayCounter > 0) {
+                    initialDelayCounter--;
+                    return;
+                }
+                
+                // Pause at bottom before reset
                 if (pauseCounter > 0) {
                     pauseCounter--;
+                    if (pauseCounter === 0 && isAtBottom) {
+                        // Reset to top after pause is complete
+                        tableContainer.scrollTop = 0;
+                        isAtBottom = false;
+                        initialDelayCounter = 100; // Reset 5-second delay for next cycle
+                        console.log('Pause complete, reset to top - starting new 5-second delay');
+                    }
                     return;
                 }
                 
@@ -445,24 +460,16 @@
                 const currentScroll = tableContainer.scrollTop;
                 const maxScroll = Math.max(0, tableContainer.scrollHeight - tableContainer.clientHeight);
                 
-                if (scrollDirection === 1) {
-                    // Scrolling down
-                    if (currentScroll >= maxScroll) {
-                        scrollDirection = -1;
-                        pauseCounter = pauseDuration; // Pause at bottom
-                    } else {
-                        tableContainer.scrollTop += scrollStep;
-                    }
-                } else {
-                    // Scrolling up
-                    if (currentScroll <= 0) {
-                        scrollDirection = 1;
-                        pauseCounter = pauseDuration; // Pause at top
-                    } else {
-                        tableContainer.scrollTop -= scrollStep;
-                    }
+                // Only scroll down
+                if (currentScroll >= maxScroll && !isAtBottom) {
+                    // Reached bottom - start pause counter
+                    isAtBottom = true;
+                    pauseCounter = pauseDuration;
+                    console.log('Reached bottom, starting 5-second pause...');
+                } else if (!isAtBottom) {
+                    tableContainer.scrollTop += scrollStep;
                 }
-            }, 50); // Back to 50ms for smooth movement
+            }, 50); // 50ms intervals for smooth movement
         }
 
         // Function to fetch league standings
