@@ -3,13 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="description" content="Fantasy Football League Dashboard - Team rankings, player stats, and weekly analysis">
     <meta name="keywords" content="fantasy football, premier league, FPL, football statistics, team rankings">
-    <link rel="icon" type="image/png" href="../assets/images/Løpegruppen.png">
     <title>Fantasy Football League</title>
     <style>
         * {
@@ -22,71 +20,85 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
             color: white;
         }
 
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: #000;
-            color: #fff;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 1000;
-            border-radius: 4px;
-        }
-
-        .skip-link:focus {
-            top: 6px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
         .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 30px;
-            max-width: 1400px;
+            display: flex;
+            justify-content: center;
+            max-width: 800px;
             margin: 0 auto;
+        }
+
+        .league-column {
+            width: 100%;
+            max-width: 800px;
         }
 
         .column {
             background: rgba(255,255,255,0.1);
             border-radius: 15px;
-            padding: 25px;
+            padding: 20px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
         }
 
         .column h2 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
             text-align: center;
             border-bottom: 2px solid rgba(255,255,255,0.3);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
+        }
+
+        .loading-message, .error-message {
+            text-align: center;
+            padding: 30px;
+            font-size: 1rem;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+        }
+
+        .gameweek-info {
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .position-movement {
+            font-size: 0.75rem;
+            margin-left: 4px;
+        }
+
+        .movement-up {
+            color: #4CAF50;
+        }
+
+        .movement-down {
+            color: #f44336;
+        }
+
+        .movement-same {
+            color: #9E9E9E;
         }
 
         .league-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
         }
 
         .league-table th,
         .league-table td {
-            padding: 10px;
+            padding: 6px 8px;
             text-align: left;
             border-bottom: 1px solid rgba(255,255,255,0.2);
         }
@@ -104,220 +116,277 @@
         .position-2 { color: #C0C0C0; font-weight: bold; }
         .position-3 { color: #CD7F32; font-weight: bold; }
 
-        .stat-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid #4CAF50;
-        }
-
-        .stat-card h3 {
-            margin-bottom: 8px;
-            color: #4CAF50;
-        }
-
-        .transfer-list {
-            list-style: none;
-        }
-
-        .transfer-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .transfer-in { color: #4CAF50; }
-        .transfer-out { color: #f44336; }
-
-        .gameweek-info {
-            text-align: center;
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 1200px) {
-            .main-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
         @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
+            body {
+                padding: 10px;
             }
             
-            .header h1 {
-                font-size: 2rem;
+            .league-table {
+                font-size: 0.9rem;
+            }
+            
+            .league-table th,
+            .league-table td {
+                padding: 8px 5px;
+            }
+            
+            .position-movement {
+                font-size: 0.7rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    
-    <header class="header">
-        <h1>⚽ Fantasy Football League</h1>
-        
-        <div class="gameweek-info">
-            <h3>Gameweek 4 | Deadline: Sat 14 Sep, 11:30</h3>
-        </div>
-    </header>
-
     <main id="main-content" class="main-content">
-        <!-- Column 1: League Table -->
-        <div class="column">
-            <h2>🏆 League Table</h2>
+        <!-- Single Column: League Table -->
+        <div class="column league-column">
+            <h2>⚽️ Fantasy Premier League 🏆</h2>
+            <div id="gameweekInfo" class="gameweek-info">
+                <p>Loading gameweek information...</p>
+            </div>
             
-            <table class="league-table">
+            <div id="loading" class="loading-message">
+                <p>Loading league data...</p>
+            </div>
+            
+            <div id="error" class="error-message" style="display: none;">
+                <p>Unable to load league data. Please try again later.</p>
+            </div>
+            
+            <table class="league-table" id="leagueTable" style="display: none;">
                 <thead>
                     <tr>
                         <th>Pos</th>
                         <th>Manager</th>
-                        <th>Team</th>
+                        <th>Team Name</th>
                         <th>GW</th>
                         <th>Total</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="position-1">
-                        <td>1</td>
-                        <td>Alistair</td>
-                        <td>Sotra Soothsayers</td>
-                        <td>67</td>
-                        <td>245</td>
-                    </tr>
-                    <tr class="position-2">
-                        <td>2</td>
-                        <td>Magnus</td>
-                        <td>Bergen Ballers</td>
-                        <td>63</td>
-                        <td>238</td>
-                    </tr>
-                    <tr class="position-3">
-                        <td>3</td>
-                        <td>Erik</td>
-                        <td>Nordnes Ninjas</td>
-                        <td>59</td>
-                        <td>235</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Kristian</td>
-                        <td>Fløyen Flyers</td>
-                        <td>55</td>
-                        <td>230</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Lars</td>
-                        <td>Askøy Aces</td>
-                        <td>52</td>
-                        <td>225</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Morten</td>
-                        <td>Sandviken Squad</td>
-                        <td>48</td>
-                        <td>220</td>
-                    </tr>
+                <tbody id="leagueTableBody">
+                    <!-- Data will be populated by JavaScript -->
                 </tbody>
             </table>
-        </div>
-
-        <!-- Column 2: Player Stats & Transfers -->
-        <div class="column">
-            <h2>📊 Top Performers</h2>
-            
-            <div class="stat-card">
-                <h3>🔥 Hot Players (GW3)</h3>
-                <p><strong>Erling Haaland</strong> - 17 pts (2 goals, 1 assist)</p>
-                <p><strong>Mohamed Salah</strong> - 15 pts (1 goal, 2 assists)</p>
-                <p><strong>Son Heung-min</strong> - 12 pts (1 goal, 1 assist)</p>
-            </div>
-
-            <div class="stat-card">
-                <h3>❄️ Cold Players (GW3)</h3>
-                <p><strong>Darwin Núñez</strong> - 1 pt (0 goals)</p>
-                <p><strong>Jack Grealish</strong> - 2 pts (yellow card)</p>
-                <p><strong>Mason Mount</strong> - 2 pts (no returns)</p>
-            </div>
-
-            <h3 style="margin: 20px 0 10px 0;">🔄 Latest Transfers</h3>
-            <ul class="transfer-list">
-                <li>
-                    <span class="transfer-in">Haaland (C) IN</span>
-                    <span>Alistair</span>
-                </li>
-                <li>
-                    <span class="transfer-out">Isak OUT</span>
-                    <span>Magnus</span>
-                </li>
-                <li>
-                    <span class="transfer-in">Palmer IN</span>
-                    <span>Erik</span>
-                </li>
-                <li>
-                    <span class="transfer-out">Foden OUT</span>
-                    <span>Kristian</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Column 3: Predictions & Analysis -->
-        <div class="column">
-            <h2>🔮 GW4 Predictions</h2>
-            
-            <div class="stat-card">
-                <h3>💰 Best Value Picks</h3>
-                <p><strong>Mbeumo (5.5m)</strong> - Great fixtures ahead</p>
-                <p><strong>Wissa (5.8m)</strong> - Consistent returns</p>
-                <p><strong>Rogers (5.4m)</strong> - Villa's main creator</p>
-            </div>
-
-            <div class="stat-card">
-                <h3>⚠️ Fixture Difficulty</h3>
-                <p><strong>Easy:</strong> Brighton, Brentford, Villa</p>
-                <p><strong>Medium:</strong> Arsenal, Spurs, United</p>
-                <p><strong>Hard:</strong> City, Liverpool, Chelsea</p>
-            </div>
-
-            <div class="stat-card">
-                <h3>📈 Trending Picks</h3>
-                <p><strong>Palmer</strong> - 25% ownership increase</p>
-                <p><strong>Saka</strong> - Arsenal's main man</p>
-                <p><strong>Wood</strong> - Nottm Forest striker</p>
-            </div>
-
-            <div class="stat-card">
-                <h3>🎯 Captaincy</h3>
-                <p><strong>Recommended:</strong> Haaland (vs West Ham)</p>
-                <p><strong>Differential:</strong> Salah (vs Bournemouth)</p>
-                <p><strong>Safe:</strong> Palmer (vs Brighton)</p>
-            </div>
         </div>
     </main>
 
     <script>
-        // Auto-refresh data every 5 minutes
-        setInterval(() => {
-            console.log('Checking for league updates...');
-            // In a real implementation, this would fetch fresh data
-        }, 300000);
+        // Fantasy Premier League API endpoints
+        const LEAGUE_ID = 1509278;
+        const FPL_API_BASE = 'https://fantasy.premierleague.com/api';
+        
+        // Proxy service to handle CORS (trying different proxies)
+        const CORS_PROXIES = [
+            'https://api.allorigins.win/raw?url=',
+            'https://corsproxy.io/?',
+            'https://cors-anywhere.herokuapp.com/'
+        ];
+        let currentProxyIndex = 0;
 
-        // Add some interactivity
-        document.addEventListener('DOMContentLoaded', function() {
-            const statCards = document.querySelectorAll('.stat-card');
-            statCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    this.style.transform = this.style.transform === 'scale(1.02)' ? 'scale(1)' : 'scale(1.02)';
-                });
+        // Function to try different CORS proxies
+        async function fetchWithProxy(url, proxyIndex = 0) {
+            if (proxyIndex >= CORS_PROXIES.length) {
+                throw new Error('All CORS proxies failed');
+            }
+            
+            try {
+                const proxy = CORS_PROXIES[proxyIndex];
+                const proxyUrl = `${proxy}${encodeURIComponent(url)}`;
+                console.log(`Trying proxy ${proxyIndex + 1}: ${proxy}`);
+                
+                const response = await fetch(proxyUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.log(`Proxy ${proxyIndex + 1} failed:`, error);
+                return fetchWithProxy(url, proxyIndex + 1);
+            }
+        }
+
+        // Caching system for gameweek info
+        const CACHE_KEY = 'fpl_gameweek_cache';
+        const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+        // Function to get cached gameweek info
+        function getCachedGameweekInfo() {
+            try {
+                const cached = localStorage.getItem(CACHE_KEY);
+                if (cached) {
+                    const data = JSON.parse(cached);
+                    const now = Date.now();
+                    if (now - data.timestamp < CACHE_DURATION) {
+                        console.log('Using cached gameweek info:', data.info);
+                        return data.info;
+                    }
+                }
+            } catch (error) {
+                console.log('Error reading cache:', error);
+            }
+            return null;
+        }
+
+        // Function to cache gameweek info
+        function cacheGameweekInfo(info) {
+            try {
+                const cacheData = {
+                    info: info,
+                    timestamp: Date.now()
+                };
+                localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+                console.log('Cached gameweek info:', info);
+            } catch (error) {
+                console.log('Error caching data:', error);
+            }
+        }
+
+        // Function to fetch current gameweek information
+        async function fetchGameweekInfo() {
+            // First, try to load from cache
+            const cachedInfo = getCachedGameweekInfo();
+            if (cachedInfo) {
+                document.getElementById('gameweekInfo').innerHTML = `<p>${cachedInfo}</p>`;
+                return;
+            }
+
+            try {
+                console.log('Fetching gameweek information from API...');
+                const data = await fetchWithProxy(`${FPL_API_BASE}/bootstrap-static/`);
+                console.log('Gameweek data received:', data);
+                
+                // Find current gameweek
+                const currentGameweek = data.events.find(event => event.is_current) || 
+                                       data.events.find(event => event.is_next) ||
+                                       data.events[0];
+                
+                if (currentGameweek) {
+                    console.log('Current gameweek:', currentGameweek);
+                    const deadlineDate = new Date(currentGameweek.deadline_time);
+                    const options = { 
+                        weekday: 'short', 
+                        day: 'numeric', 
+                        month: 'short',
+                        hour: '2-digit', 
+                        minute: '2-digit',
+                        hour12: false
+                    };
+                    const formattedDeadline = deadlineDate.toLocaleDateString('en-GB', options);
+                    const gameweekText = `Gameweek ${currentGameweek.id} | Deadline: ${formattedDeadline}`;
+                    
+                    // Cache the successful result
+                    cacheGameweekInfo(gameweekText);
+                    
+                    document.getElementById('gameweekInfo').innerHTML = `<p>${gameweekText}</p>`;
+                } else {
+                    document.getElementById('gameweekInfo').innerHTML = 
+                        `<p>Gameweek information unavailable</p>`;
+                }
+            } catch (error) {
+                console.error('Error fetching gameweek info:', error);
+                // Try to use cached data even if it's older
+                const oldCached = localStorage.getItem(CACHE_KEY);
+                if (oldCached) {
+                    try {
+                        const data = JSON.parse(oldCached);
+                        console.log('Using older cached data as fallback:', data.info);
+                        document.getElementById('gameweekInfo').innerHTML = `<p>${data.info} (cached)</p>`;
+                        return;
+                    } catch (e) {
+                        console.log('Error parsing old cache:', e);
+                    }
+                }
+                
+                // Show a clean message when gameweek info can't be loaded
+                document.getElementById('gameweekInfo').innerHTML = 
+                    `<p>Fantasy Premier League | League ${LEAGUE_ID}</p>`;
+            }
+        }
+
+        // Function to fetch league standings
+        async function fetchLeagueStandings() {
+            try {
+                console.log('Fetching league standings...');
+                const data = await fetchWithProxy(`${FPL_API_BASE}/leagues-classic/${LEAGUE_ID}/standings/`);
+                console.log('League data received:', data);
+                
+                displayLeagueTable(data.standings.results);
+                
+            } catch (error) {
+                console.error('Error fetching league data:', error);
+                showError();
+            }
+        }
+
+        // Function to display the league table
+        function displayLeagueTable(standings) {
+            const tableBody = document.getElementById('leagueTableBody');
+            const loadingElement = document.getElementById('loading');
+            const tableElement = document.getElementById('leagueTable');
+            
+            // Hide loading message
+            loadingElement.style.display = 'none';
+            
+            // Clear existing data
+            tableBody.innerHTML = '';
+            
+            // Add standings data
+            standings.forEach((team, index) => {
+                const row = document.createElement('tr');
+                
+                // Add position-based styling
+                if (index === 0) row.classList.add('position-1');
+                else if (index === 1) row.classList.add('position-2');
+                else if (index === 2) row.classList.add('position-3');
+                
+                // Calculate position movement
+                let movementIndicator = '';
+                if (team.last_rank && team.rank !== team.last_rank) {
+                    const movement = team.last_rank - team.rank;
+                    if (movement > 0) {
+                        movementIndicator = `<span class="position-movement movement-up">↑${movement}</span>`;
+                    } else {
+                        movementIndicator = `<span class="position-movement movement-down">↓${Math.abs(movement)}</span>`;
+                    }
+                } else if (team.last_rank) {
+                    movementIndicator = `<span class="position-movement movement-same">-</span>`;
+                }
+                
+                row.innerHTML = `
+                    <td>${team.rank}${movementIndicator}</td>
+                    <td>${team.player_name}</td>
+                    <td>${team.entry_name}</td>
+                    <td>${team.event_total}</td>
+                    <td>${team.total.toLocaleString()}</td>
+                `;
+                
+                tableBody.appendChild(row);
             });
+            
+            // Show the table
+            tableElement.style.display = 'table';
+        }
+
+        // Function to show error message
+        function showError() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('error').style.display = 'block';
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, fetching FPL data...');
+            
+            // Fetch data
+            fetchGameweekInfo();
+            fetchLeagueStandings();
+            
+            // Set up auto-refresh every 5 minutes
+            setInterval(() => {
+                console.log('Refreshing league data...');
+                fetchLeagueStandings();
+            }, 300000);
         });
     </script>
 </body>

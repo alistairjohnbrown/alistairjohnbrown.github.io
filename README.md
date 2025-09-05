@@ -12,10 +12,11 @@ A collection of responsive web dashboards featuring running club management and 
 - **Display Optimized**: Designed for ScreenCloud digital display screens
 
 ### ⚽ **Fantasy Football** - League Analytics Dashboard
-- **League Table**: Live rankings with gameweek scores
-- **Player Analysis**: Hot/cold performers and value picks
-- **Transfer Tracking**: Latest moves and recommendations
-- **Fixture Analysis**: Difficulty ratings and captaincy advice
+- **Live FPL Integration**: Real-time data from Fantasy Premier League API (League ID: 1509278)
+- **League Table**: Live rankings with gameweek scores and position movement indicators
+- **Smart Caching**: 24-hour localStorage caching for reliable data display
+- **Gameweek Information**: Current gameweek and deadline display
+- **Compact Design**: Optimized table layout to display maximum teams without scrolling
 - **Display Optimized**: Designed for ScreenCloud digital display screens
 
 ## 📺 ScreenCloud Integration
@@ -26,9 +27,10 @@ The individual dashboard pages are specifically designed for **ScreenCloud digit
   - Running Dashboard: `https://alistairjohnbrown.github.io/pages/running.html`
   - Fantasy Football: `https://alistairjohnbrown.github.io/pages/fantasy-football.html`
 - **Clean Interface**: No navigation elements that would clutter display screens
-- **Auto-Refresh**: Built-in refresh functionality for live data updates
+- **Auto-Refresh**: Built-in refresh functionality for live data updates (FPL every 5 minutes)
 - **Full-Screen Optimized**: Content utilizes full screen real estate
 - **Responsive Design**: Adapts to different screen sizes and orientations
+- **Cross-Browser Compatible**: Enhanced with vendor prefixes for older display browsers
 
 ## 📁 Project Structure
 
@@ -45,8 +47,8 @@ alistairjohnbrown.github.io/
 │   │   ├── Maren.jpg
 │   │   ├── Paul.jpg
 │   │   └── Sven.jpg
-│   ├── data/                 # CSV data files
-│   │   ├── events.csv        # Running events
+│   └── data/                 # CSV data files
+│       └── events.csv        # Running events
 │   │   └── fantasy-league.csv # Fantasy football data
 │   ├── css/                  # Future: External stylesheets
 │   └── js/                   # Future: External JavaScript
@@ -65,11 +67,14 @@ alistairjohnbrown.github.io/
   - Backdrop filters and modern effects
 - **JavaScript**: 
   - CSV parsing for dynamic data loading
-  - Auto-refresh functionality
+  - Auto-refresh functionality (FPL API integration)
   - Interactive UI elements
+  - Smart caching with localStorage
+  - CORS proxy handling for external APIs
 - **External APIs**: 
-  - Strava club activity widgets
-  - Fantasy Premier League data integration (planned)
+  - Strava club activity widgets with anti-caching
+  - Fantasy Premier League API integration
+  - Multiple CORS proxy fallback system
 
 ## 🛠️ Local Development
 
@@ -86,6 +91,21 @@ alistairjohnbrown.github.io/
 
 3. **View in browser**: Navigate to `http://localhost:8000`
 
+4. **ScreenCloud Testing**: Add `?screencloud-debug` to any page URL for compatibility testing
+
+## 🔧 ScreenCloud Browser Compatibility
+
+### Testing ScreenCloud Layout:
+- **Debug Mode**: Add `?screencloud-debug` to running page URL
+- **Recommended Resolutions**: 1920x1080, 1366x768, 1280x720
+- **Browser Setup**: Chrome/Edge with `--disable-web-security` flag for CORS testing
+- **Layout Verification**: Ensure header shows logo+admins side-by-side, main content in three columns
+
+### Compatibility Features:
+- **Flexbox with Vendor Prefixes**: `-webkit-`, `-ms-` prefixes for older browsers
+- **No CSS Grid Dependency**: Uses flexbox for maximum compatibility
+- **Graceful Degradation**: Responsive fallbacks for unsupported features
+
 ## 📊 Data Management
 
 ### Running Events (events.csv)
@@ -95,11 +115,13 @@ date,title,description
 2025-09-15,Fløyen Løp,Samling ved Fløibanen kl. 10:00
 ```
 
-### Fantasy Football (fantasy-league.csv)
-League data in `assets/data/fantasy-league.csv`:
-```csv
-gameweek,manager,team_name,gw_points,total_points,position
-```
+### Fantasy Football League
+The Fantasy Football page connects directly to the Fantasy Premier League API:
+- **League ID**: 1509278 (configurable in JavaScript)
+- **Data Source**: Official FPL API with CORS proxy handling
+- **Caching**: 24-hour localStorage cache for reliability
+- **Refresh Rate**: Every 5 minutes when page is active
+- **Fallback**: Displays clean message when API unavailable
 
 ### Member Photos
 Place photos in `assets/images/` with naming: `FirstName.jpg`
@@ -128,33 +150,58 @@ Place photos in `assets/images/` with naming: `FirstName.jpg`
 - Optimized layouts for each dashboard type
 
 ### Data Integration:
-- CSV-based data management
+- CSV-based data management (running events)
+- Live API integration (Fantasy Premier League)
 - Auto-refresh functionality for live updates
-- Fallback data for offline testing
+- Smart caching with localStorage fallback
+- CORS proxy handling for external APIs
 - ScreenCloud compatible refresh intervals
 
 ### ScreenCloud Optimization:
-- Navigation-free individual pages
-- Direct URL access for digital signage
-- Full-screen content utilization
-- Automatic data refresh cycles
-- Professional display appearance
+- Navigation-free individual pages for clean display
+- Direct URL access for digital signage setup
+- Full-screen content utilization without wasted space
+- Automatic data refresh cycles (5 minutes for FPL, 10 minutes for Strava)
+- Professional display appearance optimized for viewing from distance
+- Cross-browser compatibility with vendor prefixes for older display hardware
 
 ## 🌐 Live Site
 
 Visit: [https://alistairjohnbrown.github.io](https://alistairjohnbrown.github.io)
 
+## 🎯 Recent Updates
+
+### Fantasy Football Enhancements:
+- **Live API Integration**: Now pulls real data from Fantasy Premier League API
+- **Smart Caching**: 24-hour localStorage cache prevents loading issues
+- **Position Indicators**: Shows ↑↓ movement from previous gameweek
+- **Compact Layout**: Optimized table design fits more teams on screen
+- **Gameweek Display**: Shows current gameweek and deadline information
+
+### ScreenCloud Optimizations:
+- **Browser Compatibility**: Enhanced with vendor prefixes for older display browsers
+- **Debug Mode**: Added `?screencloud-debug` parameter for layout testing
+- **Flexbox Migration**: Moved from CSS Grid to Flexbox for better compatibility
+- **Layout Fixes**: Resolved stacking issues with logo/admin and three-column layouts
+
 ## 🔧 Features in Detail
 
-### Anti-Caching for Strava
-- Automatic iframe refresh every 10 minutes
-- Cache-busting parameters in URLs
-- Meta tags prevent browser caching
+### Anti-Caching for Live Data
+- **Strava Widgets**: Automatic iframe refresh every 10 minutes with cache-busting
+- **FPL Data**: Smart caching with 24-hour localStorage and 5-minute refresh cycles
+- **Meta Tags**: Prevent browser caching for always-fresh content
 
 ### Responsive Design
 - Mobile-first CSS approach
-- Flexible grid that adapts to screen size
+- Flexbox-based layouts with vendor prefixes for maximum compatibility
 - Optimized emoji and text sizing
+- ScreenCloud browser compatibility testing tools
+
+### API Integration & Reliability
+- **Fantasy Premier League**: Live data with multiple CORS proxy fallbacks
+- **Smart Caching**: localStorage with 24-hour TTL and graceful degradation
+- **Error Handling**: Clean fallback messages when APIs unavailable
+- **Position Tracking**: Shows team movement with ↑↓ indicators
 
 ### Accessibility
 - Semantic HTML structure
