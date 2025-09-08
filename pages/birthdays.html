@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Månedens bursdager">
+    <meta name="keywords" content="bursdag, gratulasjon, september">
+    <title>Månedens Bursdager</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/birthday-favicon.svg?v=1">
+    <link rel="shortcut icon" type="image/svg+xml" href="../assets/images/birthday-favicon.svg?v=1">
+    <link rel="apple-touch-icon" href="../assets/images/birthday-favicon.svg?v=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 20%, #f8b500 40%, #ff6348 60%, #ff9ff3 80%, #54a0ff 100%);
+            background-size: 400% 400%;
+            animation: festiveGradient 8s ease-in-out infinite;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes festiveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .main-container {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(45deg, #fff, #ffeb3b, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: sparkle 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes sparkle {
+            0% { filter: brightness(1) saturate(1); }
+            100% { filter: brightness(1.2) saturate(1.3); }
+        }
+
+        .birthday-container {
+            flex: 1;
+            overflow: hidden;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .birthday-scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .birthday-scroll-area::-webkit-scrollbar {
+            display: none;
+        }
+
+        .birthday-date-group {
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 8px;
+            border-left: 3px solid #ffeb3b;
+        }
+
+        .date-header {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .date-header::before {
+            content: '�';
+            font-size: 1.2rem;
+        }
+
+        .names-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .name-tag {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+            border-radius: 15px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .name-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .name-tag:nth-child(3n+1) {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(196, 69, 105, 0.4));
+        }
+
+        .name-tag:nth-child(3n+2) {
+            background: linear-gradient(135deg, rgba(248, 181, 0, 0.4), rgba(255, 99, 72, 0.4));
+        }
+
+        .name-tag:nth-child(3n+3) {
+            background: linear-gradient(135deg, rgba(84, 160, 255, 0.4), rgba(255, 159, 243, 0.4));
+        }
+
+        .footer-message {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 235, 59, 0.3); }
+            100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 235, 59, 0.6); }
+        }
+
+        .no-birthdays {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 40px;
+            font-style: italic;
+        }
+
+        /* Scrollbar styling for birthday container */
+        .birthday-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .birthday-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .birthday-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+        }
+
+        .birthday-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .main-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .birthday-container {
+                max-height: 500px;
+                padding: 15px;
+            }
+            
+            .date-header {
+                font-size: 1.3rem;
+            }
+            
+            .name-tag {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+            
+            .footer-message {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <h1 class="title" id="monthlyTitle">Hurra for dere, som fyller år i september</h1>
+        
+        <div class="birthday-container" id="birthdayContainer">
+            <!-- Birthday groups will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="footer-message">🎉 Gratulerer med dagen! 🎂</div>
+    </div>
+
+    <script>
+        // Birthday data - expanded sample with multiple people per date
+        const birthdayData = [
+            // September birthdays (current month for demo)
+            { name: "Maren Løvlie", date: 3, month: 9 },
+            { name: "Erik Strand", date: 3, month: 9 },
+            { name: "Kristine Aune", date: 7, month: 9 },
+            { name: "Lars Haugen", date: 7, month: 9 },
+            { name: "Silje Berge", date: 7, month: 9 },
+            { name: "Alistair Brown", date: 15, month: 9 },
+            { name: "Thomas Berg", date: 15, month: 9 },
+            { name: "Sven Andersson", date: 22, month: 9 },
+            { name: "Anna Karlsen", date: 22, month: 9 },
+            { name: "Per Johansen", date: 28, month: 9 },
+            { name: "Ingrid Hansen", date: 28, month: 9 },
+            { name: "Magnus Olsen", date: 28, month: 9 },
+            
+            // October birthdays
+            { name: "Emma Nielsen", date: 7, month: 10 },
+            { name: "Kari Solberg", date: 7, month: 10 },
+            { name: "Lars Olsen", date: 14, month: 10 },
+            { name: "Tone Bakken", date: 14, month: 10 },
+            { name: "Henrik Aas", date: 21, month: 10 },
+            { name: "Geir Næss", date: 21, month: 10 },
+            { name: "Camilla Rød", date: 21, month: 10 },
+            
+            // November birthdays
+            { name: "Ingrid Haugen", date: 5, month: 11 },
+            { name: "Øyvind Pedersen", date: 5, month: 11 },
+            { name: "Per Johansen", date: 12, month: 11 },
+            { name: "Hanne Gundersen", date: 12, month: 11 },
+            { name: "Kristian Moen", date: 18, month: 11 },
+            { name: "Berit Lund", date: 25, month: 11 },
+            { name: "Terje Holm", date: 25, month: 11 },
+            { name: "Marit Svendsen", date: 29, month: 11 },
+            
+            // December birthdays
+            { name: "Anna Kristiansen", date: 5, month: 12 },
+            { name: "Ola Thorsen", date: 5, month: 12 },
+            { name: "Silje Karlsen", date: 12, month: 12 },
+            { name: "Thomas Berg", date: 18, month: 12 },
+            { name: "Rune Kjærstad", date: 18, month: 12 },
+            { name: "Grete Lie", date: 24, month: 12 },
+            { name: "Anders Bye", date: 24, month: 12 },
+            { name: "Kari Solberg", date: 31, month: 12 },
+            
+            // January birthdays
+            { name: "Erik Andersen", date: 9, month: 1 },
+            { name: "Lise Hansen", date: 9, month: 1 },
+            { name: "Magnus Eriksen", date: 16, month: 1 },
+            { name: "Sofie Larsen", date: 16, month: 1 },
+            { name: "Øyvind Pedersen", date: 23, month: 1 },
+            { name: "Hanne Gundersen", date: 26, month: 1 },
+            { name: "Kristian Moen", date: 26, month: 1 },
+            
+            // Add more months as needed...
+            { name: "Berit Lund", date: 8, month: 2 },
+            { name: "Terje Holm", date: 13, month: 2 },
+            { name: "Marit Svendsen", date: 20, month: 2 },
+            { name: "Ola Thorsen", date: 27, month: 2 },
+            
+            { name: "Silje Karlsen", date: 6, month: 3 },
+            { name: "Geir Næss", date: 13, month: 3 },
+            { name: "Camilla Rød", date: 19, month: 3 },
+            { name: "Henrik Aas", date: 25, month: 3 },
+            
+            { name: "Tone Bakken", date: 2, month: 4 },
+            { name: "Rune Kjærstad", date: 9, month: 4 },
+            { name: "Grete Lie", date: 16, month: 4 },
+            { name: "Anders Bye", date: 23, month: 4 },
+            { name: "Erik Strand", date: 30, month: 4 },
+            
+            { name: "Kristine Aune", date: 7, month: 5 },
+            { name: "Lars Haugen", date: 14, month: 5 },
+            { name: "Silje Berge", date: 21, month: 5 },
+            { name: "Thomas Berg", date: 28, month: 5 },
+            
+            { name: "Anna Karlsen", date: 4, month: 6 },
+            { name: "Per Johansen", date: 11, month: 6 },
+            { name: "Ingrid Hansen", date: 18, month: 6 },
+            { name: "Magnus Olsen", date: 25, month: 6 },
+            
+            { name: "Emma Nielsen", date: 2, month: 7 },
+            { name: "Kari Solberg", date: 9, month: 7 },
+            { name: "Lars Olsen", date: 16, month: 7 },
+            { name: "Tone Bakken", date: 23, month: 7 },
+            { name: "Henrik Aas", date: 30, month: 7 },
+            
+            { name: "Geir Næss", date: 6, month: 8 },
+            { name: "Camilla Rød", date: 13, month: 8 },
+            { name: "Rune Kjærstad", date: 20, month: 8 },
+            { name: "Grete Lie", date: 27, month: 8 }
+        ];
+
+        // Norwegian month names
+        const norwegianMonths = [
+            "januar", "februar", "mars", "april", "mai", "juni",
+            "juli", "august", "september", "oktober", "november", "desember"
+        ];
+
+        // Get current month (1-12)
+        function getCurrentMonth() {
+            return new Date().getMonth() + 1;
+        }
+
+        // Update title with current month
+        function updateTitle() {
+            const currentMonth = getCurrentMonth();
+            const monthName = norwegianMonths[currentMonth - 1];
+            document.getElementById('monthlyTitle').textContent = 
+                `Hurra for dere, som fyller år i ${monthName}`;
+        }
+
+        // Get birthdays for current month grouped by date
+        function getCurrentMonthBirthdays() {
+            const currentMonth = getCurrentMonth();
+            const monthlyBirthdays = birthdayData.filter(person => person.month === currentMonth);
+            
+            // Group by date
+            const groupedByDate = {};
+            monthlyBirthdays.forEach(person => {
+                if (!groupedByDate[person.date]) {
+                    groupedByDate[person.date] = [];
+                }
+                groupedByDate[person.date].push(person);
+            });
+            
+            // Sort dates and return array of date groups
+            const sortedDates = Object.keys(groupedByDate).sort((a, b) => parseInt(a) - parseInt(b));
+            return sortedDates.map(date => ({
+                date: parseInt(date),
+                people: groupedByDate[date].sort((a, b) => a.name.localeCompare(b.name))
+            }));
+        }
+
+        // Format date for display
+        function formatDate(date) {
+            return `${date}. september`; // Will be updated dynamically
+        }
+
+        // Format date with current month name
+        function formatDateWithMonth(date) {
+            const currentMonth = getCurrentMonth();
+            const monthName = norwegianMonths[currentMonth - 1];
+            return `${date}. ${monthName}`;
+        }
+
+        // Render birthday groups
+        function renderBirthdays() {
+            const birthdayContainer = document.getElementById('birthdayContainer');
+            const dateGroups = getCurrentMonthBirthdays();
+
+            if (dateGroups.length === 0) {
+                birthdayContainer.innerHTML = `
+                    <div class="no-birthdays">
+                        Ingen bursdager denne måneden 🎈
+                    </div>
+                `;
+                return;
+            }
+
+            const birthdayHTML = dateGroups.map(group => {
+                const nameTagsHTML = group.people.map(person => 
+                    `<div class="name-tag">${person.name}</div>`
+                ).join('');
+
+                return `
+                    <div class="birthday-date-group">
+                        <div class="date-header">${formatDateWithMonth(group.date)}</div>
+                        <div class="names-list">
+                            ${nameTagsHTML}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            birthdayContainer.innerHTML = birthdayHTML;
+        }
+
+        // Initialize the page
+        function init() {
+            updateTitle();
+            renderBirthdays();
+            
+            // Update every hour to catch month changes
+            setInterval(() => {
+                updateTitle();
+                renderBirthdays();
+            }, 60 * 60 * 1000);
+        }
+
+        // Start when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>
