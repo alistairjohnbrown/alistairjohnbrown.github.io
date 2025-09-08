@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard Hub - Running Club, Fantasy Football, and Birthday Celebrations">
+    <meta name="keywords" content="dashboard, running, fantasy football, birthdays, navigation">
+    <title>Dashboard Hub</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 50px;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .screenshot {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .status-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-badge.auto {
+            background: #2196F3;
+        }
+
+        .status-badge.dynamic {
+            background: #FF9800;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ScreenCloud optimizations */
+        @supports (display: -webkit-flex) {
+            .dashboard-grid {
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+            
+            .dashboard-card {
+                -webkit-flex: 1 1 350px;
+                flex: 1 1 350px;
+                max-width: 400px;
+                margin: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="header">
+            <h1 class="title">Screen Pages Hub</h1>
+            <p class="subtitle">Vibe coding pages to display on ScreenCloud</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Running Dashboard Card -->
+            <a href="pages/running.html" class="dashboard-card">
+                <div class="card-header">
+                    <img src="assets/images/runner.png" class="card-icon" alt="Running">
+                    <h2 class="card-title">Running Club</h2>
+                </div>
+                <p class="card-description">
+                    Løpegruppen dashboard with member profiles, Strava integration, 
+                    summer challenge results, and recurring training schedules.
+                </p>
+                <!-- Running dashboard screenshot -->
+                <img src="assets/images/running-screenshot.png" class="screenshot" alt="Running Dashboard">
+                <div class="card-footer">
+                    <span>Strava Connected</span>
+                    <span class="status-badge">Live Data</span>
+                </div>
+            </a>
+
+            <!-- Fantasy Football Card -->
+            <a href="pages/fantasy-football.html" class="dashboard-card">
+                <div class="card-header">
+                    <img src="assets/images/trophy.png" class="card-icon" alt="Trophy">
+                    <h2 class="card-title">Fantasy Football</h2>
+                </div>
+                <p class="card-description">
+                    Live Fantasy Premier League table for league 1509278 with 
+                    auto-scroll functionality and official FPL styling.
+                </p>
+                <!-- Fantasy football screenshot -->
+                <img src="assets/images/fantasy-football-screenshot.png" class="screenshot" alt="Fantasy Football Dashboard">
+                <div class="card-footer">
+                    <span>FPL API</span>
+                    <span class="status-badge auto">Auto-Scroll</span>
+                </div>
+            </a>
+
+            <!-- Birthdays Card -->
+            <a href="pages/birthdays.html" class="dashboard-card">
+                <div class="card-header">
+                    <img src="assets/images/birthday-favicon.svg" class="card-icon" alt="Birthday">
+                    <h2 class="card-title">Monthly Birthdays</h2>
+                </div>
+                <p class="card-description">
+                    Dynamic birthday celebrations that automatically update each month 
+                    with festive Norwegian styling and grouped date display.
+                </p>
+                <!-- Birthdays screenshot -->
+                <img src="assets/images/birthdays-screenshot.png" class="screenshot" alt="Monthly Birthdays Dashboard">
+                <div class="card-footer">
+                    <span>Norwegian Text</span>
+                    <span class="status-badge dynamic">Monthly Update</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
