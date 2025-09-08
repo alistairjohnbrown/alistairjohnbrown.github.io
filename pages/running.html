@@ -275,10 +275,17 @@
 
         /* Make all emojis larger than surrounding text */
         .emoji {
-            font-size: 1.3em;
+            width: 1.3em;
+            height: 1.3em;
             display: inline-block;
             vertical-align: middle;
-            line-height: 1;
+        }
+
+        .medal {
+            width: 1.2em;
+            height: 1.2em;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         /* Competition layout - gold left, silver/bronze right */
@@ -572,7 +579,7 @@
     <main id="main-content" class="main-content">
         <!-- Column 1: Strava Widgets -->
         <div class="column">
-            <h2><span class="emoji">🏃‍♂️</span> Strava Activity</h2>
+            <h2><img src="../assets/images/runner.png" class="emoji" alt="Runner"> Strava Activity</h2>
             <div class="strava-widgets">
                 <div class="widget-container">
                     <iframe allowtransparency='true' frameborder='0' height='160' scrolling='no'
@@ -596,7 +603,7 @@
             <div class="recurring-section">
                 <div class="viva-engage-text">📢 <i>Sjekk Viva Engage for mer info</i></div>
                 <br>
-                <h4>♻️ Faste Treninger</h4>
+                <h4><img src="../assets/images/recycling.png" class="emoji" alt="Recycling"> Faste Treninger</h4>
                 <ul class="recurring-list" style="padding-left:40px">
                     <li class="recurring-item">Mandag: Social Run - lav tempo rundt SLV</li>
                     <li class="recurring-item">Torsdag: Intervaller - Svens 4x4</li>
@@ -612,14 +619,14 @@
 
         <!-- Column 3: Distance Podium -->
         <div class="column">
-            <h2>🏆 Sommer Challenge 2025</h2>
+            <h2><img src="../assets/images/trophy.png" class="emoji" alt="Trophy"> Sommer Challenge 2025</h2>
 
             <!-- Competition 1: Flest kilometer -->
             <div class="competition-section">
-                <h3><span class="emoji">👟</span> Flest kilometer</h3>
+                <h3><img src="../assets/images/running-shoe.png" class="emoji" alt="Running shoe"> Flest kilometer</h3>
                 <div class="competition-results">
                     <div class="gold-winner">
-                        <span class="medal">🥇</span>
+                        <img src="../assets/images/medal-gold.png" class="medal" alt="Gold medal">
                         <div class="info-column">
                             <div class="name">Paul Tenfjord</div>
                             <div class="value">584 km</div>
@@ -629,7 +636,7 @@
                         <div class="silver-winner">
                             <div class="name-row"
                                 style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="medal">🥈</span>
+                                <img src="../assets/images/medal-silver.png" class="medal" alt="Silver medal">
                                 <span class="name">Alistair Brown</span>
                                 <span class="value">573 km</span>
                             </div>
@@ -637,7 +644,7 @@
                         <div class="bronze-winner">
                             <div class="name-row"
                                 style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="medal">🥉</span>
+                                <img src="../assets/images/medal-bronze.png" class="medal" alt="Bronze medal">
                                 <span class="name">Thomas Børdal</span>
                                 <span class="value">459 km</span>
                             </div>
@@ -648,10 +655,10 @@
 
             <!-- Competition 2: Flest høydemeter -->
             <div class="competition-section">
-                <h3><span class="emoji">⛰️</span> Flest høydemeter</h3>
+                <h3><img src="../assets/images/mountain.png" class="emoji" alt="Mountain"> Flest høydemeter</h3>
                 <div class="competition-results">
                     <div class="gold-winner">
-                        <span class="medal">🥇</span>
+                        <img src="../assets/images/medal-gold.png" class="medal" alt="Gold medal">
                         <div class="info-column">
                             <div class="name">Maren Fagervik</div>
                             <div class="value">24.381 m</div>
@@ -661,7 +668,7 @@
                         <div class="silver-winner">
                             <div class="name-row"
                                 style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="medal">🥈</span>
+                                <img src="../assets/images/medal-silver.png" class="medal" alt="Silver medal">
                                 <span class="name">Paul Tenfjord</span>
                                 <span class="value">19.301 m</span>
                             </div>
@@ -669,7 +676,7 @@
                         <div class="bronze-winner">
                             <div class="name-row"
                                 style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="medal">🥉</span>
+                                <img src="../assets/images/medal-bronze.png" class="medal" alt="Bronze medal">
                                 <span class="name">Sven Solemdal</span>
                                 <span class="value">13.310 m</span>
                             </div>
@@ -680,10 +687,10 @@
 
             <!-- Competition 3: Lengste distanse -->
             <div class="competition-section">
-                <h3><span class="emoji">🛣️</span> Lengste distanse</h3>
+                <h3><img src="../assets/images/road.png" class="emoji" alt="Road"> Lengste distanse</h3>
                 <div class="competition-results">
                     <div class="gold-winner">
-                        <span class="medal">🥇</span>
+                        <img src="../assets/images/medal-gold.png" class="medal" alt="Gold medal">
                         <div class="info-column">
                             <div class="name">Alistair Brown</div>
                             <div class="value">67 km</div>
@@ -693,7 +700,7 @@
                         <div class="silver-winner">
                             <div class="name-row"
                                 style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="medal">🥈</span>
+                                <img src="../assets/images/medal-silver.png" class="medal" alt="Silver medal">
                                 <span class="name">Paul Tenfjord</span>
                                 <span class="value">60 km</span>
                             </div>
@@ -701,7 +708,7 @@
                         <div class="bronze-winner">
                             <div class="name-row"
                                 style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <span class="medal">🥉</span>
+                                <img src="../assets/images/medal-bronze.png" class="medal" alt="Bronze medal">
                                 <span class="name">Thomas Børdal</span>
                                 <span class="value">27 km</span>
                             </div>
@@ -842,7 +849,7 @@
             const debugInfo = document.createElement('div');
             debugInfo.className = 'screencloud-emulation';
             debugInfo.innerHTML = `
-                <h3>🖥️ ScreenCloud Browser Emulation</h3>
+                <h3><img src="../assets/images/loudspeaker.png" class="emoji" alt="Loudspeaker"> ScreenCloud Browser Emulation</h3>
                 <p><strong>Viewport:</strong> ${window.innerWidth}x${window.innerHeight}</p>
                 <p><strong>User Agent:</strong> ${navigator.userAgent}</p>
                 <p><strong>CSS Grid Support:</strong> ${CSS.supports('display', 'grid') ? '✅ Yes' : '❌ No'}</p>
