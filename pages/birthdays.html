@@ -49,16 +49,16 @@
             width: 100%;
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
             background: linear-gradient(45deg, #fff, #ffeb3b, #fff);
             -webkit-background-clip: text;
@@ -75,10 +75,10 @@
         .birthday-container {
             flex: 1;
             overflow: hidden;
-            margin-bottom: 10px;
-            padding: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+            border-radius: 12px;
             border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
@@ -95,46 +95,89 @@
             display: none;
         }
 
-        .birthday-date-group {
-            margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.15);
+        .birthday-week-row {
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             padding: 8px;
+            border: 1px solid rgba(255, 235, 59, 0.3);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .week-header {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ffeb3b;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 8px;
+            background: rgba(255, 235, 59, 0.15);
+            border-radius: 6px;
             border-left: 3px solid #ffeb3b;
+            white-space: nowrap;
+            min-width: 70px;
+        }
+
+        .week-header::before {
+            content: '📅';
+            font-size: 1rem;
+        }
+
+        .week-dates {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .date-column {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 6px;
+            border-left: 2px solid #ffeb3b;
+            min-width: 120px;
+            flex: 1;
+        }
+
+        .birthday-date-group {
+            margin-bottom: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 6px;
+            border-left: 2px solid #ffeb3b;
         }
 
         .date-header {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             color: #ffeb3b;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .date-header::before {
-            content: '�';
-            font-size: 1.2rem;
+            margin-bottom: 4px;
+            text-align: left;
         }
 
         .names-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 3px;
+            justify-content: flex-start;
         }
 
         .name-tag {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
-            border-radius: 15px;
-            padding: 4px 10px;
-            font-size: 0.85rem;
+            border-radius: 12px;
+            padding: 3px 8px;
+            font-size: 0.75rem;
             font-weight: 500;
             color: white;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: left;
         }
 
         .name-tag:hover {
@@ -155,11 +198,12 @@
         }
 
         .footer-message {
-            font-size: 2rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: #ffeb3b;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             animation: glow 2s ease-in-out infinite alternate;
+            margin-top: 8px;
         }
 
         @keyframes glow {
@@ -238,98 +282,93 @@
     </div>
 
     <script>
-        // Birthday data - expanded sample with multiple people per date
-        const birthdayData = [
-            // September birthdays (current month for demo)
-            { name: "Maren Løvlie", date: 3, month: 9 },
-            { name: "Erik Strand", date: 3, month: 9 },
-            { name: "Kristine Aune", date: 7, month: 9 },
-            { name: "Lars Haugen", date: 7, month: 9 },
-            { name: "Silje Berge", date: 7, month: 9 },
-            { name: "Alistair Brown", date: 15, month: 9 },
-            { name: "Thomas Berg", date: 15, month: 9 },
-            { name: "Sven Andersson", date: 22, month: 9 },
-            { name: "Anna Karlsen", date: 22, month: 9 },
-            { name: "Per Johansen", date: 28, month: 9 },
-            { name: "Ingrid Hansen", date: 28, month: 9 },
-            { name: "Magnus Olsen", date: 28, month: 9 },
+        // Birthday data loaded from CSV file
+        let birthdayData = [];
+
+        // Load birthday data from CSV file
+        async function loadBirthdayData() {
+            try {
+                const response = await fetch('../assets/data/birthdays.csv');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const csvText = await response.text();
+                birthdayData = parseCSV(csvText);
+                console.log(`Loaded ${birthdayData.length} birthdays from CSV file`);
+                
+                // Initialize the page after data is loaded
+                initializePage();
+            } catch (error) {
+                console.error('Error loading birthday data:', error);
+                // Fallback to sample data for demonstration
+                birthdayData = [
+                    { name: "Alistair Brown", date: 28, month: 2 },
+                    { name: "Sample Person", date: 15, month: 9 }
+                ];
+                console.log('Using fallback sample data');
+                initializePage();
+            }
+        }
+
+        // Parse CSV text into birthday data array
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            const birthdays = [];
             
-            // October birthdays
-            { name: "Emma Nielsen", date: 7, month: 10 },
-            { name: "Kari Solberg", date: 7, month: 10 },
-            { name: "Lars Olsen", date: 14, month: 10 },
-            { name: "Tone Bakken", date: 14, month: 10 },
-            { name: "Henrik Aas", date: 21, month: 10 },
-            { name: "Geir Næss", date: 21, month: 10 },
-            { name: "Camilla Rød", date: 21, month: 10 },
+            // Skip header row (index 0)
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i];
+                if (line.trim() === '') continue;
+                
+                // Parse CSV line (handle quoted fields)
+                const columns = parseCSVLine(line);
+                if (columns.length >= 2) {
+                    const name = columns[0].replace(/"/g, '').trim();
+                    const dateOfBirth = columns[1].replace(/"/g, '').trim();
+                    
+                    // Parse date format DD.MM.YYYY
+                    const dateParts = dateOfBirth.split('.');
+                    if (dateParts.length === 3) {
+                        const day = parseInt(dateParts[0]);
+                        const month = parseInt(dateParts[1]);
+                        
+                        if (day >= 1 && day <= 31 && month >= 1 && month <= 12) {
+                            birthdays.push({
+                                name: name,
+                                date: day,
+                                month: month
+                            });
+                        }
+                    }
+                }
+            }
             
-            // November birthdays
-            { name: "Ingrid Haugen", date: 5, month: 11 },
-            { name: "Øyvind Pedersen", date: 5, month: 11 },
-            { name: "Per Johansen", date: 12, month: 11 },
-            { name: "Hanne Gundersen", date: 12, month: 11 },
-            { name: "Kristian Moen", date: 18, month: 11 },
-            { name: "Berit Lund", date: 25, month: 11 },
-            { name: "Terje Holm", date: 25, month: 11 },
-            { name: "Marit Svendsen", date: 29, month: 11 },
+            return birthdays;
+        }
+
+        // Simple CSV line parser that handles quoted fields
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
             
-            // December birthdays
-            { name: "Anna Kristiansen", date: 5, month: 12 },
-            { name: "Ola Thorsen", date: 5, month: 12 },
-            { name: "Silje Karlsen", date: 12, month: 12 },
-            { name: "Thomas Berg", date: 18, month: 12 },
-            { name: "Rune Kjærstad", date: 18, month: 12 },
-            { name: "Grete Lie", date: 24, month: 12 },
-            { name: "Anders Bye", date: 24, month: 12 },
-            { name: "Kari Solberg", date: 31, month: 12 },
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ';' && !inQuotes) {
+                    result.push(current);
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
             
-            // January birthdays
-            { name: "Erik Andersen", date: 9, month: 1 },
-            { name: "Lise Hansen", date: 9, month: 1 },
-            { name: "Magnus Eriksen", date: 16, month: 1 },
-            { name: "Sofie Larsen", date: 16, month: 1 },
-            { name: "Øyvind Pedersen", date: 23, month: 1 },
-            { name: "Hanne Gundersen", date: 26, month: 1 },
-            { name: "Kristian Moen", date: 26, month: 1 },
-            
-            // Add more months as needed...
-            { name: "Berit Lund", date: 8, month: 2 },
-            { name: "Terje Holm", date: 13, month: 2 },
-            { name: "Marit Svendsen", date: 20, month: 2 },
-            { name: "Ola Thorsen", date: 27, month: 2 },
-            
-            { name: "Silje Karlsen", date: 6, month: 3 },
-            { name: "Geir Næss", date: 13, month: 3 },
-            { name: "Camilla Rød", date: 19, month: 3 },
-            { name: "Henrik Aas", date: 25, month: 3 },
-            
-            { name: "Tone Bakken", date: 2, month: 4 },
-            { name: "Rune Kjærstad", date: 9, month: 4 },
-            { name: "Grete Lie", date: 16, month: 4 },
-            { name: "Anders Bye", date: 23, month: 4 },
-            { name: "Erik Strand", date: 30, month: 4 },
-            
-            { name: "Kristine Aune", date: 7, month: 5 },
-            { name: "Lars Haugen", date: 14, month: 5 },
-            { name: "Silje Berge", date: 21, month: 5 },
-            { name: "Thomas Berg", date: 28, month: 5 },
-            
-            { name: "Anna Karlsen", date: 4, month: 6 },
-            { name: "Per Johansen", date: 11, month: 6 },
-            { name: "Ingrid Hansen", date: 18, month: 6 },
-            { name: "Magnus Olsen", date: 25, month: 6 },
-            
-            { name: "Emma Nielsen", date: 2, month: 7 },
-            { name: "Kari Solberg", date: 9, month: 7 },
-            { name: "Lars Olsen", date: 16, month: 7 },
-            { name: "Tone Bakken", date: 23, month: 7 },
-            { name: "Henrik Aas", date: 30, month: 7 },
-            
-            { name: "Geir Næss", date: 6, month: 8 },
-            { name: "Camilla Rød", date: 13, month: 8 },
-            { name: "Rune Kjærstad", date: 20, month: 8 },
-            { name: "Grete Lie", date: 27, month: 8 }
-        ];
+            result.push(current); // Add the last field
+            return result;
+        }
 
         // Norwegian month names
         const norwegianMonths = [
@@ -350,26 +389,70 @@
                 `Hurra for dere, som fyller år i ${monthName}`;
         }
 
-        // Get birthdays for current month grouped by date
+        // ISO week calculation functions
+        function getISOWeek(date) {
+            const d = new Date(date);
+            d.setHours(0, 0, 0, 0);
+            // Thursday in current week decides the year
+            d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+            // January 4 is always in week 1
+            const week1 = new Date(d.getFullYear(), 0, 4);
+            // Adjust to Thursday in week 1 and count weeks from there
+            return 1 + Math.round(((d.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+        }
+
+        function getWeekDateRange(year, month, weekNumber) {
+            // Find all dates in the month that belong to this week
+            const weekDates = [];
+            for (let day = 1; day <= 31; day++) {
+                const testDate = new Date(year, month - 1, day);
+                if (testDate.getMonth() !== month - 1) break; // End of month
+                
+                if (getISOWeek(testDate) === weekNumber) {
+                    weekDates.push(day);
+                }
+            }
+            
+            return weekDates;
+        }
+
+        // Get birthdays for current month grouped by ISO week, then by date
         function getCurrentMonthBirthdays() {
             const currentMonth = getCurrentMonth();
+            const currentYear = new Date().getFullYear();
             const monthlyBirthdays = birthdayData.filter(person => person.month === currentMonth);
             
-            // Group by date
-            const groupedByDate = {};
+            // Group by ISO week first
+            const groupedByWeek = {};
             monthlyBirthdays.forEach(person => {
-                if (!groupedByDate[person.date]) {
-                    groupedByDate[person.date] = [];
+                const personDate = new Date(currentYear, currentMonth - 1, person.date);
+                const weekNumber = getISOWeek(personDate);
+                
+                if (!groupedByWeek[weekNumber]) {
+                    groupedByWeek[weekNumber] = {};
                 }
-                groupedByDate[person.date].push(person);
+                
+                if (!groupedByWeek[weekNumber][person.date]) {
+                    groupedByWeek[weekNumber][person.date] = [];
+                }
+                
+                groupedByWeek[weekNumber][person.date].push(person);
             });
             
-            // Sort dates and return array of date groups
-            const sortedDates = Object.keys(groupedByDate).sort((a, b) => parseInt(a) - parseInt(b));
-            return sortedDates.map(date => ({
-                date: parseInt(date),
-                people: groupedByDate[date].sort((a, b) => a.name.localeCompare(b.name))
-            }));
+            // Convert to sorted array structure
+            const sortedWeeks = Object.keys(groupedByWeek).sort((a, b) => parseInt(a) - parseInt(b));
+            return sortedWeeks.map(weekNumber => {
+                const weekData = groupedByWeek[weekNumber];
+                const sortedDates = Object.keys(weekData).sort((a, b) => parseInt(a) - parseInt(b));
+                
+                return {
+                    week: parseInt(weekNumber),
+                    dates: sortedDates.map(date => ({
+                        date: parseInt(date),
+                        people: weekData[date].sort((a, b) => a.name.localeCompare(b.name))
+                    }))
+                };
+            });
         }
 
         // Format date for display
@@ -384,12 +467,12 @@
             return `${date}. ${monthName}`;
         }
 
-        // Render birthday groups
+        // Render birthday groups by week (rows) and dates (columns)
         function renderBirthdays() {
             const birthdayContainer = document.getElementById('birthdayContainer');
-            const dateGroups = getCurrentMonthBirthdays();
+            const weekGroups = getCurrentMonthBirthdays();
 
-            if (dateGroups.length === 0) {
+            if (weekGroups.length === 0) {
                 birthdayContainer.innerHTML = `
                     <div class="no-birthdays">
                         Ingen bursdager denne måneden 🎈
@@ -398,16 +481,27 @@
                 return;
             }
 
-            const birthdayHTML = dateGroups.map(group => {
-                const nameTagsHTML = group.people.map(person => 
-                    `<div class="name-tag">${person.name}</div>`
-                ).join('');
+            const birthdayHTML = weekGroups.map(weekGroup => {
+                const dateColumnsHTML = weekGroup.dates.map(dateGroup => {
+                    const nameTagsHTML = dateGroup.people.map(person => 
+                        `<div class="name-tag">${person.name}</div>`
+                    ).join('');
+
+                    return `
+                        <div class="date-column">
+                            <div class="date-header">${dateGroup.date}.</div>
+                            <div class="names-list">
+                                ${nameTagsHTML}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
 
                 return `
-                    <div class="birthday-date-group">
-                        <div class="date-header">${formatDateWithMonth(group.date)}</div>
-                        <div class="names-list">
-                            ${nameTagsHTML}
+                    <div class="birthday-week-row">
+                        <div class="week-header">Uke ${weekGroup.week}</div>
+                        <div class="week-dates">
+                            ${dateColumnsHTML}
                         </div>
                     </div>
                 `;
@@ -416,8 +510,8 @@
             birthdayContainer.innerHTML = birthdayHTML;
         }
 
-        // Initialize the page
-        function init() {
+        // Initialize the page after data is loaded
+        function initializePage() {
             updateTitle();
             renderBirthdays();
             
@@ -428,8 +522,8 @@
             }, 60 * 60 * 1000);
         }
 
-        // Start when page loads
-        document.addEventListener('DOMContentLoaded', init);
+        // Start loading data when page loads
+        document.addEventListener('DOMContentLoaded', loadBirthdayData);
     </script>
 </body>
 
