@@ -509,6 +509,60 @@
             padding: 20px;
         }
 
+        /* Photo Gallery - Polaroid Style */
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .polaroid {
+            background: #fff;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 2px;
+            transform-origin: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            max-width: 250px;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid:nth-child(odd) {
+            transform: rotate(-1.5deg);
+        }
+
+        .polaroid:nth-child(3n) {
+            transform: rotate(1deg);
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 1px;
+        }
+
+        .polaroid-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-weight: normal;
+        }
+
         /* Skip link for accessibility */
         .skip-link {
             position: absolute;
@@ -564,13 +618,6 @@
                     </div>
                     <div class="admin-name">Alistair</div>
                 </div>
-                <div class="admin">
-                    <div class="admin-thumbnail">
-                        <img src="../assets/images/Paul.jpg" alt="Paul"
-                            onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
-                    </div>
-                    <div class="admin-name">Paul</div>
-                </div>
             </div>
         </div>
     </header>
@@ -617,103 +664,29 @@
             </ul>
         </div>
 
-        <!-- Column 3: Distance Podium -->
+        <!-- Column 3: Photo Gallery -->
         <div class="column">
-            <h2><img src="../assets/images/trophy.png" class="emoji" alt="Trophy"> Sommer Challenge 2025</h2>
-
-            <!-- Competition 1: Flest kilometer -->
-            <div class="competition-section">
-                <h3><img src="../assets/images/running-shoe.png" class="emoji" alt="Running shoe"> Flest kilometer</h3>
-                <div class="competition-results">
-                    <div class="gold-winner">
-                        <img src="../assets/images/medal-gold.png" class="medal" alt="Gold medal">
-                        <div class="info-column">
-                            <div class="name">Paul Tenfjord</div>
-                            <div class="value">584 km</div>
-                        </div>
-                    </div>
-                    <div class="silver-bronze-stack">
-                        <div class="silver-winner">
-                            <div class="name-row"
-                                style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <img src="../assets/images/medal-silver.png" class="medal" alt="Silver medal">
-                                <span class="name">Alistair Brown</span>
-                                <span class="value">573 km</span>
-                            </div>
-                        </div>
-                        <div class="bronze-winner">
-                            <div class="name-row"
-                                style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <img src="../assets/images/medal-bronze.png" class="medal" alt="Bronze medal">
-                                <span class="name">Thomas Børdal</span>
-                                <span class="value">459 km</span>
-                            </div>
-                        </div>
-                    </div>
+            <h2><img src="../assets/images/camera.png" class="emoji" alt="Camera"> Løpebilder</h2>
+            
+            <div class="photo-gallery">
+                <div class="polaroid">
+                    <img src="../assets/images/Running/BCM2025.jpg" alt="Bergen City Marathon 2025">
+                    <div class="polaroid-caption">Bergen City Marathon 2025</div>
                 </div>
-            </div>
-
-            <!-- Competition 2: Flest høydemeter -->
-            <div class="competition-section">
-                <h3><img src="../assets/images/mountain.png" class="emoji" alt="Mountain"> Flest høydemeter</h3>
-                <div class="competition-results">
-                    <div class="gold-winner">
-                        <img src="../assets/images/medal-gold.png" class="medal" alt="Gold medal">
-                        <div class="info-column">
-                            <div class="name">Maren Fagervik</div>
-                            <div class="value">24.381 m</div>
-                        </div>
-                    </div>
-                    <div class="silver-bronze-stack">
-                        <div class="silver-winner">
-                            <div class="name-row"
-                                style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <img src="../assets/images/medal-silver.png" class="medal" alt="Silver medal">
-                                <span class="name">Paul Tenfjord</span>
-                                <span class="value">19.301 m</span>
-                            </div>
-                        </div>
-                        <div class="bronze-winner">
-                            <div class="name-row"
-                                style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <img src="../assets/images/medal-bronze.png" class="medal" alt="Bronze medal">
-                                <span class="name">Sven Solemdal</span>
-                                <span class="value">13.310 m</span>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="polaroid">
+                    <img src="../assets/images/Running/Hansastafetten2025.jpeg" alt="Hansastafetten 2025">
+                    <div class="polaroid-caption">Hansastafetten 2025</div>
                 </div>
-            </div>
-
-            <!-- Competition 3: Lengste distanse -->
-            <div class="competition-section">
-                <h3><img src="../assets/images/road.png" class="emoji" alt="Road"> Lengste distanse</h3>
-                <div class="competition-results">
-                    <div class="gold-winner">
-                        <img src="../assets/images/medal-gold.png" class="medal" alt="Gold medal">
-                        <div class="info-column">
-                            <div class="name">Alistair Brown</div>
-                            <div class="value">67 km</div>
-                        </div>
-                    </div>
-                    <div class="silver-bronze-stack">
-                        <div class="silver-winner">
-                            <div class="name-row"
-                                style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <img src="../assets/images/medal-silver.png" class="medal" alt="Silver medal">
-                                <span class="name">Paul Tenfjord</span>
-                                <span class="value">60 km</span>
-                            </div>
-                        </div>
-                        <div class="bronze-winner">
-                            <div class="name-row"
-                                style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                                <img src="../assets/images/medal-bronze.png" class="medal" alt="Bronze medal">
-                                <span class="name">Thomas Børdal</span>
-                                <span class="value">27 km</span>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="polaroid">
+                    <img src="../assets/images/Running/RosaSløyfe2025.jpeg" alt="Rosa Sløyfe 2025">
+                    <div class="polaroid-caption">Rosa Sløyfe 2025</div>
+                </div>
+                
+                <div class="polaroid">
+                    <img src="../assets/images/Running/mandag.jpeg" alt="Mandagsløp">
+                    <div class="polaroid-caption">Mandagsløp</div>
                 </div>
             </div>
         </div>

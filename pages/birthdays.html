@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Månedens bursdager">
-    <meta name="keywords" content="bursdag, gratulasjon, september">
-    <title>Månedens Bursdager</title>
+    <meta name="description" content="Oversikt over månedens bursdager med tilgjengelig design og navigasjon">
+    <meta name="keywords" content="bursdag, gratulasjon, tilgjengelighet, wcag">
+    <meta name="author" content="Løpegruppen">
+    <title>Månedens Bursdager - Tilgjengelig Oversikt</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/birthday-favicon.svg?v=1">
     <link rel="shortcut icon" type="image/svg+xml" href="../assets/images/birthday-favicon.svg?v=1">
     <link rel="apple-touch-icon" href="../assets/images/birthday-favicon.svg?v=1">
@@ -26,10 +27,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 20%, #f8b500 40%, #ff6348 60%, #ff9ff3 80%, #54a0ff 100%);
-            background-size: 400% 400%;
-            animation: festiveGradient 8s ease-in-out infinite;
-            color: white;
+            background-color: #FEF2E5;
+            min-height: 100vh;
+            color: #333;
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -37,49 +37,44 @@
             align-items: center;
         }
 
-        @keyframes festiveGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Respect user's motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .name-tag {
+                transition: none;
+            }
         }
 
         .main-container {
             text-align: center;
             max-width: 900px;
             width: 100%;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.15);
+            background: #E3DEEC;
             border-radius: 15px;
-            padding: 12px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: none;
         }
 
         .title {
             font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 12px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(45deg, #fff, #ffeb3b, #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: sparkle 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            border-bottom: 3px solid #FEF2E5;
+            padding-bottom: 10px;
         }
 
-        @keyframes sparkle {
-            0% { filter: brightness(1) saturate(1); }
-            100% { filter: brightness(1.2) saturate(1.3); }
-        }
+
 
         .birthday-container {
             flex: 1;
             overflow: hidden;
-            margin-bottom: 8px;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #FEF2E5;
             border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
         }
@@ -87,44 +82,39 @@
         .birthday-scroll-area {
             flex: 1;
             overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
         }
 
-        .birthday-scroll-area::-webkit-scrollbar {
-            display: none;
+        .birthday-scroll-area:focus {
+            outline: 2px solid #333;
+            outline-offset: 2px;
         }
 
         .birthday-week-row {
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            padding: 8px;
-            border: 1px solid rgba(255, 235, 59, 0.3);
+            margin-bottom: 15px;
+            background: #E3DEEC;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 15px;
         }
 
         .week-header {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            color: #ffeb3b;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: #333;
             display: flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 8px;
-            background: rgba(255, 235, 59, 0.15);
-            border-radius: 6px;
-            border-left: 3px solid #ffeb3b;
+            padding: 10px 15px;
+            background: #FEF2E5;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             white-space: nowrap;
-            min-width: 70px;
-        }
-
-        .week-header::before {
-            content: '📅';
-            font-size: 1rem;
+            min-width: 80px;
         }
 
         .week-dates {
@@ -135,88 +125,110 @@
         }
 
         .date-column {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            padding: 6px;
-            border-left: 2px solid #ffeb3b;
+            background: #FEF2E5;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             min-width: 120px;
             flex: 1;
         }
 
         .birthday-date-group {
             margin-bottom: 6px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            padding: 6px;
-            border-left: 2px solid #ffeb3b;
+            background: #FEF2E5;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .date-header {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: bold;
-            color: #ffeb3b;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            margin-bottom: 4px;
+            color: #333;
+            margin-bottom: 8px;
             text-align: left;
+            border-bottom: 2px solid #E3DEEC;
+            padding-bottom: 4px;
         }
 
         .names-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 3px;
+            gap: 4px;
             justify-content: flex-start;
         }
 
         .name-tag {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
-            border-radius: 12px;
-            padding: 3px 8px;
-            font-size: 0.75rem;
+            background: #E3DEEC;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
             font-weight: 500;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-align: left;
+            color: #333;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            text-align: center;
+            cursor: default;
+            position: relative;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .name-tag:hover {
+        .name-tag:hover,
+        .name-tag:focus {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-color: #333;
+            outline: none;
         }
 
         .name-tag:nth-child(3n+1) {
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(196, 69, 105, 0.4));
+            background: linear-gradient(135deg, #E3DEEC 0%, #d4c8d8 100%);
         }
 
         .name-tag:nth-child(3n+2) {
-            background: linear-gradient(135deg, rgba(248, 181, 0, 0.4), rgba(255, 99, 72, 0.4));
+            background: linear-gradient(135deg, #E3DEEC 0%, #d8d1e0 100%);
         }
 
         .name-tag:nth-child(3n+3) {
-            background: linear-gradient(135deg, rgba(84, 160, 255, 0.4), rgba(255, 159, 243, 0.4));
+            background: linear-gradient(135deg, #E3DEEC 0%, #ddd5e3 100%);
         }
 
         .footer-message {
             font-size: 1.4rem;
             font-weight: 600;
-            color: #ffeb3b;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            animation: glow 2s ease-in-out infinite alternate;
-            margin-top: 8px;
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
         }
 
-        @keyframes glow {
-            0% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 235, 59, 0.3); }
-            100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 235, 59, 0.6); }
-        }
+
 
         .no-birthdays {
             font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: #666;
             text-align: center;
             padding: 40px;
             font-style: italic;
+        }
+
+        /* Skip to content link for keyboard navigation */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #333;
+            color: #fff;
+            padding: 8px 12px;
+            text-decoration: none;
+            z-index: 1000;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: top 0.2s ease;
+        }
+
+        .skip-to-content:focus {
+            top: 6px;
+            outline: 2px solid #E3DEEC;
         }
 
         /* Scrollbar styling for birthday container */
@@ -225,61 +237,146 @@
         }
 
         .birthday-container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: 4px;
         }
 
         .birthday-container::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 4px;
         }
 
         .birthday-container::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus management */
+        *:focus {
+            outline: 2px solid #333;
+            outline-offset: 2px;
+        }
+
+        .name-tag:focus {
+            outline: 3px solid #333;
+            outline-offset: 2px;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .main-container {
+                background: #ffffff;
+                border: 3px solid #000000;
+            }
+            
+            .birthday-week-row {
+                border: 2px solid #000000;
+            }
+            
+            .name-tag {
+                border: 2px solid #000000;
+                background: #ffffff;
+                color: #000000;
+            }
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .main-container {
-                padding: 20px;
-                margin: 10px;
+                padding: 16px;
+                margin: 8px;
             }
             
             .birthday-container {
-                max-height: 500px;
-                padding: 15px;
+                max-height: 60vh;
+                padding: 12px;
+            }
+            
+            .birthday-week-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .week-header {
+                min-width: auto;
+                align-self: flex-start;
+            }
+            
+            .week-dates {
+                flex-direction: column;
+            }
+            
+            .date-column {
+                min-width: auto;
             }
             
             .date-header {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
             
             .name-tag {
                 font-size: 0.9rem;
-                padding: 6px 12px;
+                padding: 8px 12px;
+                min-height: 44px; /* Touch target size */
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             .footer-message {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Touch device improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .name-tag {
+                min-height: 44px;
+                padding: 12px 16px;
+            }
+            
+            .name-tag:hover {
+                transform: none; /* Remove hover effects on touch devices */
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="main-container">
+    <a href="#main-content" class="skip-to-content">Hopp til hovedinnhold</a>
+    
+    <main class="main-container" role="main" id="main-content">
         <h1 class="title" id="monthlyTitle">Hurra for dere, som fyller år i september</h1>
         
-        <div class="birthday-container" id="birthdayContainer">
+        <section class="birthday-container" id="birthdayContainer" 
+                 aria-label="Bursdagsliste for måneden" 
+                 role="region"
+                 tabindex="0">
             <!-- Birthday groups will be inserted here by JavaScript -->
-        </div>
+        </section>
         
-        <div class="footer-message">🎉 Gratulerer med dagen! 🎂</div>
-    </div>
+        <footer class="footer-message" role="contentinfo" aria-label="Gratulasjon">
+            <span aria-hidden="true">🎉</span> Gratulerer med dagen! <span aria-hidden="true">🎂</span>
+        </footer>
+    </main>
 
     <script>
         // Birthday data loaded from CSV file
@@ -311,6 +408,17 @@
             }
         }
 
+        // Convert name to proper case (handle "FirstName SURNAME" format)
+        function formatNameProperCase(name) {
+            // Split the name into parts
+            const nameParts = name.split(' ');
+            
+            return nameParts.map(part => {
+                // Convert each part to proper case (first letter uppercase, rest lowercase)
+                return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+            }).join(' ');
+        }
+
         // Parse CSV text into birthday data array
         function parseCSV(csvText) {
             const lines = csvText.trim().split('\n');
@@ -324,8 +432,11 @@
                 // Parse CSV line (handle quoted fields)
                 const columns = parseCSVLine(line);
                 if (columns.length >= 2) {
-                    const name = columns[0].replace(/"/g, '').trim();
+                    const rawName = columns[0].replace(/"/g, '').trim();
                     const dateOfBirth = columns[1].replace(/"/g, '').trim();
+                    
+                    // Convert name to proper case
+                    const name = formatNameProperCase(rawName);
                     
                     // Parse date format DD.MM.YYYY
                     const dateParts = dateOfBirth.split('.');
@@ -386,7 +497,7 @@
             const currentMonth = getCurrentMonth();
             const monthName = norwegianMonths[currentMonth - 1];
             document.getElementById('monthlyTitle').textContent = 
-                `Hurra for dere, som fyller år i ${monthName}`;
+                `Hurra for dere som fyller år i ${monthName}!`;
         }
 
         // ISO week calculation functions
@@ -471,26 +582,36 @@
         function renderBirthdays() {
             const birthdayContainer = document.getElementById('birthdayContainer');
             const weekGroups = getCurrentMonthBirthdays();
+            const currentMonth = getCurrentMonth();
+            const monthName = norwegianMonths[currentMonth - 1];
 
             if (weekGroups.length === 0) {
                 birthdayContainer.innerHTML = `
-                    <div class="no-birthdays">
-                        Ingen bursdager denne måneden 🎈
+                    <div class="no-birthdays" role="status" aria-live="polite">
+                        Ingen bursdager denne måneden <span aria-hidden="true">🎈</span>
                     </div>
                 `;
+                birthdayContainer.setAttribute('aria-label', `Ingen bursdager i ${monthName}`);
                 return;
             }
 
-            const birthdayHTML = weekGroups.map(weekGroup => {
-                const dateColumnsHTML = weekGroup.dates.map(dateGroup => {
-                    const nameTagsHTML = dateGroup.people.map(person => 
-                        `<div class="name-tag">${person.name}</div>`
+            // Calculate total number of people with birthdays
+            const totalPeople = weekGroups.reduce((total, week) => 
+                total + week.dates.reduce((weekTotal, date) => weekTotal + date.people.length, 0), 0);
+
+            const birthdayHTML = weekGroups.map((weekGroup, weekIndex) => {
+                const dateColumnsHTML = weekGroup.dates.map((dateGroup, dateIndex) => {
+                    const nameTagsHTML = dateGroup.people.map((person, personIndex) => 
+                        `<span class="name-tag" 
+                               role="listitem" 
+                               tabindex="0"
+                               aria-label="${person.name}, bursdag ${dateGroup.date}. ${monthName}">${person.name}</span>`
                     ).join('');
 
                     return `
-                        <div class="date-column">
-                            <div class="date-header">${dateGroup.date}.</div>
-                            <div class="names-list">
+                        <div class="date-column" role="group" aria-labelledby="date-${weekIndex}-${dateIndex}">
+                            <h3 class="date-header" id="date-${weekIndex}-${dateIndex}">${dateGroup.date}. ${monthName}</h3>
+                            <div class="names-list" role="list" aria-label="${dateGroup.people.length} person${dateGroup.people.length !== 1 ? 'er' : ''} har bursdag">
                                 ${nameTagsHTML}
                             </div>
                         </div>
@@ -498,16 +619,31 @@
                 }).join('');
 
                 return `
-                    <div class="birthday-week-row">
-                        <div class="week-header">Uke ${weekGroup.week}</div>
-                        <div class="week-dates">
+                    <section class="birthday-week-row" role="group" aria-labelledby="week-${weekIndex}">
+                        <h2 class="week-header" id="week-${weekIndex}">
+                            Uke ${weekGroup.week}
+                        </h2>
+                        <div class="week-dates" role="group">
                             ${dateColumnsHTML}
                         </div>
-                    </div>
+                    </section>
                 `;
             }).join('');
 
             birthdayContainer.innerHTML = birthdayHTML;
+            birthdayContainer.setAttribute('aria-label', `${totalPeople} person${totalPeople !== 1 ? 'er' : ''} har bursdag i ${monthName}`);
+            
+            // Announce to screen readers that content has been updated
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = `Bursdagsliste oppdatert. ${totalPeople} person${totalPeople !== 1 ? 'er' : ''} har bursdag i ${monthName}.`;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
         }
 
         // Initialize the page after data is loaded
